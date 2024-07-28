@@ -1,5 +1,6 @@
 package com.example.expense_tracker.presentation
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
@@ -35,24 +37,29 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.expense_tracker.navigation.Screen
-import com.example.expense_tracker.presentation.auth.login.LoginEvents
-import com.example.expense_tracker.presentation.auth.login.LoginViewModel
 import com.example.expense_tracker.presentation.auth.register.RegisterEvents
+import com.example.expense_tracker.presentation.auth.register.RegisterViewModel
+
 
 @Composable
-fun LoginScreen(
-navController: NavController,
+fun SignupScreen(
+navController: NavController
 ) {
-    val viewModel: LoginViewModel = hiltViewModel()
+    val viewModel: RegisterViewModel = hiltViewModel()
 
-    val email = viewModel.loginState.collectAsState().value.email
-    val password = viewModel.loginState.collectAsState().value.password
+    val firstName = viewModel.registerState.collectAsState().value.firstName
+    val lastName = viewModel.registerState.collectAsState().value.lastName
+    val email = viewModel.registerState.collectAsState().value.email
+    val password = viewModel.registerState.collectAsState().value.password
+
+
+    val toastMessage = viewModel.authResult.collectAsState().value
 
     Surface(
-        modifier= Modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(28.dp)
             .background(Color.White)
+            .padding(20.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -60,7 +67,7 @@ navController: NavController,
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Login",
+                text = "Hey there,",
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 40.dp),
@@ -72,7 +79,7 @@ navController: NavController,
                 )
             )
             Text(
-                text = "Welcome Back",
+                text = "Create an Account",
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = TextStyle(
@@ -89,9 +96,46 @@ navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(8.dp)),
+                value = firstName ,
+                onValueChange = {
+                    viewModel.onEvent(RegisterEvents.onFirstNameChange(it))
+                },
+                label = {
+                    Text(text = "First Name")
+                        },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = "Account"
+                    )
+                }
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp)),
+                value = lastName ,
+                onValueChange = {
+                    viewModel.onEvent(RegisterEvents.onLastNameChange(it))
+                },
+                label = {
+                    Text(text = "Last Name")
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = "Account"
+                    )
+                }
+            )
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp)),
                 value = email,
                 onValueChange = {
-                   viewModel.onEvent(LoginEvents.onEmailValueChange(it))
+                    viewModel.onEvent(RegisterEvents.onEmailChange(it))
                 },
                 label = { Text(text = "Email") },
                 leadingIcon = {
@@ -107,7 +151,7 @@ navController: NavController,
                     .clip(RoundedCornerShape(8.dp)),
                 value = password,
                 onValueChange = {
-                    viewModel.onEvent(LoginEvents.onPasswordValueChange(it))
+                    viewModel.onEvent(RegisterEvents.onPasswordChange(it))
                 },
                 label = { Text(text = "Password") },
                 leadingIcon = {
@@ -117,40 +161,42 @@ navController: NavController,
                     )
                 }
             )
-            Spacer(modifier = Modifier.height(20.dp))
 
+
+            Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = {
-                    viewModel.onEvent(LoginEvents.onLoginClick(email,password))
+                    viewModel.onEvent(RegisterEvents.onRegisterClick(
+                        firstName,lastName,email,password
+                    ))
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(48.dp)
             ) {
                 Text(
-                    text = "Login",
+                    text = "Register",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
-            ) {Text("Don't have an account? ", modifier = Modifier)
+            ) {Text("Already have an account? ", modifier = Modifier)
                 TextButton(onClick = {
-                    navController.navigate(Screen.RegisterScreen.route)
-                },
+                    navController.navigate(Screen.LoginScreen.route)
+                                     },
                     modifier = Modifier
                 ) {
-                    Text("Signup")
+                    Text("Login")
                 }
             }
+
         }
     }
 }
+
