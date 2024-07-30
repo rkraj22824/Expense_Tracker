@@ -1,10 +1,9 @@
-package com.example.expense_tracker.domain.usecase
+package com.example.expense_tracker.domain.usecase.auth
 
 import com.example.expense_tracker.common.Resource
 import com.example.expense_tracker.domain.repository.AuthRepository
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 

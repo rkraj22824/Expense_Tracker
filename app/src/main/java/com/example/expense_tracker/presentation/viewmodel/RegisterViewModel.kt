@@ -1,20 +1,14 @@
-package com.example.expense_tracker.presentation.auth.register
+package com.example.expense_tracker.presentation.viewmodel
 
 
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.expense_tracker.common.Resource
-import com.example.expense_tracker.data.repository.AuthRepositoryImp
-import com.example.expense_tracker.domain.usecase.AuthUseCase
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.rpc.context.AttributeContext
+import com.example.expense_tracker.domain.usecase.auth.AuthUseCase
+import com.example.expense_tracker.presentation.events.RegisterEvents
+import com.example.expense_tracker.presentation.state.RegisterState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +25,7 @@ class RegisterViewModel @Inject constructor(
     val authResult: StateFlow<String> = _authResult
 
     fun onEvent(event: RegisterEvents) {
-        when (event) {
+        when(event) {
             is RegisterEvents.onFirstNameChange -> {
                 _registerState.value = registerState.value.copy(
                     firstName = event.firstname

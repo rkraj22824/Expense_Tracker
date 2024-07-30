@@ -1,5 +1,6 @@
 package com.example.expense_tracker.presentation
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,16 +37,14 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.expense_tracker.navigation.Screen
-import com.example.expense_tracker.presentation.auth.login.LoginEvents
-import com.example.expense_tracker.presentation.auth.login.LoginViewModel
-import com.example.expense_tracker.presentation.auth.register.RegisterEvents
-
+import com.example.expense_tracker.presentation.events.LoginEvents
+import com.example.expense_tracker.presentation.viewmodel.LoginViewModel
 @Composable
 fun LoginScreen(
 navController: NavController,
 ) {
     val viewModel: LoginViewModel = hiltViewModel()
-
+    val context = LocalContext.current
     val email = viewModel.loginState.collectAsState().value.email
     val password = viewModel.loginState.collectAsState().value.password
 
@@ -121,7 +121,12 @@ navController: NavController,
 
             Button(
                 onClick = {
-                    viewModel.onEvent(LoginEvents.onLoginClick(email,password))
+                    if(email.isNotEmpty() && password.isNotEmpty()){
+                        viewModel.onEvent(LoginEvents.onLoginClick(email,password))
+                        navController.navigate(Screen.HomeScreen.route)
+                    }else{
+                        Toast.makeText(context, "Please enter email and password", Toast.LENGTH_SHORT).show()
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()

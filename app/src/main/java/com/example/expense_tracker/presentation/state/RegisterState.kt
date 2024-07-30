@@ -1,6 +1,4 @@
-package com.example.expense_tracker.presentation.auth.register
-
-import com.example.expense_tracker.common.Resource
+package com.example.expense_tracker.presentation.state
 
 data class RegisterState(
     val firstName: String = "",

@@ -2,6 +2,8 @@ package com.example.expense_tracker.presentation.components
 
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,18 +13,29 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.expense_tracker.presentation.events.AddTransactionEvents
+import com.example.expense_tracker.presentation.viewmodel.AddTransactionViewModel
 
 @Composable
 fun SignupFooter(navController: NavController) {
@@ -36,6 +49,57 @@ fun SignupFooter(navController: NavController) {
             modifier = Modifier.wrapContentSize(Alignment.Center)
         ) {
             Text("Login")
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ExposedDropdownMenu(
+
+) {
+    val viewModel = hiltViewModel<AddTransactionViewModel>()
+    val value:Array<String> = arrayOf("Expense","Income")
+    val expanded = viewModel.addTransactionState.collectAsState().value.isExpanded
+    val selectedText = viewModel.addTransactionState.collectAsState().value.selectedText
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = {
+                viewModel.onEvent(AddTransactionEvents.onExpanded(true))
+            }
+        ) {
+            OutlinedTextField(
+                value = selectedText,
+                onValueChange = {
+                },
+                readOnly = true,
+                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                modifier = Modifier.menuAnchor(),
+                shape = RoundedCornerShape(16.dp)
+            )
+
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { viewModel.onEvent(AddTransactionEvents.onExpanded(false)) }
+            ) {
+                value.forEach { item ->
+                    DropdownMenuItem(
+                        text = { Text(
+                            text = item
+                        ) },
+                        onClick = {
+                            viewModel.onEvent(AddTransactionEvents.onSelected(item))
+                            viewModel.onEvent(AddTransactionEvents.onExpanded(false))
+                        }
+                    )
+                }
+            }
         }
     }
 }

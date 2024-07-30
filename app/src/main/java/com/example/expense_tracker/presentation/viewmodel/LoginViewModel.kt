@@ -1,10 +1,10 @@
-package com.example.expense_tracker.presentation.auth.login
+package com.example.expense_tracker.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.expense_tracker.domain.usecase.AuthUseCase
-import com.example.expense_tracker.presentation.auth.register.RegisterState
+import com.example.expense_tracker.domain.usecase.auth.AuthUseCase
+import com.example.expense_tracker.presentation.events.LoginEvents
+import com.example.expense_tracker.presentation.state.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +22,6 @@ class LoginViewModel @Inject constructor(
     private val _loginResult = MutableStateFlow("")
     val loginResult: StateFlow<String> = _loginResult
 
-    private val currentUser=authUseCase.getCurrentUseCase
 
     fun onEvent(event: LoginEvents){
         when(event){
@@ -51,6 +50,5 @@ class LoginViewModel @Inject constructor(
                 }
             }
         }
-
     }
 }

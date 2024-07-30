@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.expense_tracker.navigation.Screen
-import com.example.expense_tracker.presentation.auth.register.RegisterEvents
-import com.example.expense_tracker.presentation.auth.register.RegisterViewModel
+import com.example.expense_tracker.presentation.events.RegisterEvents
+import com.example.expense_tracker.presentation.viewmodel.RegisterViewModel
 
 
 @Composable
@@ -166,7 +166,8 @@ navController: NavController
             Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = {
-                    viewModel.onEvent(RegisterEvents.onRegisterClick(
+                    viewModel.onEvent(
+                        RegisterEvents.onRegisterClick(
                         firstName,lastName,email,password
                     ))
                 },

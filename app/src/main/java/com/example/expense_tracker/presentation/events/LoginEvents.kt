@@ -1,4 +1,4 @@
-package com.example.expense_tracker.presentation.auth.login
+package com.example.expense_tracker.presentation.events
 
 sealed class LoginEvents {
 
