@@ -18,7 +18,7 @@ class AddTransactionRepositoryImp @Inject constructor(
 ):AddTransactionRepository {
     override suspend fun addTransaction(
         title: String,
-        amount: String,
+        amount: Long,
         type: String,
         tag: String,
         note: String

@@ -30,7 +30,7 @@ class ProfileRepositoryImp @Inject constructor(
 
             emit(Profile(firstName, lastName, email))
         }catch (e:Exception){
-            Log.d("getProfile", e.message.toString())
+            Log.d("Error in getProfile", e.message.toString())
         }
     }
 }

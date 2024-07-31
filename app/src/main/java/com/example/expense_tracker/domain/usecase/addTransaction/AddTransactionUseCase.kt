@@ -10,7 +10,7 @@ import javax.inject.Inject
 class AddTransactionUseCase @Inject constructor(
     private val addTransactionRepository: AddTransactionRepository
 ){
-    suspend operator  fun invoke(title: String, amount: String, type: String, tag: String, note: String): Flow<Resource<AuthResult>> {
+    suspend operator  fun invoke(title: String, amount: Long, type: String, tag: String, note: String): Flow<Resource<AuthResult>> {
         return addTransactionRepository.addTransaction(title, amount, type, tag, note)
     }
 }

@@ -4,12 +4,15 @@ package com.example.expense_tracker.di
 
 
 import com.example.expense_tracker.data.repository.AddTransactionRepositoryImp
+import com.example.expense_tracker.data.repository.AllTransactionRepositoryImp
 import com.example.expense_tracker.data.repository.AuthRepositoryImp
 import com.example.expense_tracker.data.repository.ProfileRepositoryImp
 import com.example.expense_tracker.domain.repository.AddTransactionRepository
+import com.example.expense_tracker.domain.repository.AllTransactionRepository
 import com.example.expense_tracker.domain.repository.AuthRepository
 import com.example.expense_tracker.domain.repository.ProfileRepository
 import com.example.expense_tracker.domain.usecase.addTransaction.AddTransactionUseCase
+import com.example.expense_tracker.domain.usecase.allTransactionUseCase.AllTransactionUseCase
 import com.example.expense_tracker.domain.usecase.auth.AuthUseCase
 //import com.example.expense_tracker.domain.usecase.GetCurrentUseCase
 import com.example.expense_tracker.domain.usecase.auth.LoginUseCase
@@ -70,5 +73,16 @@ class AppModule {
     @Singleton
     fun providesAddTransactionUseCase(addTransactionRepository: AddTransactionRepository): AddTransactionUseCase =
         AddTransactionUseCase(addTransactionRepository)
+
+    @Provides
+    @Singleton
+    fun provideAllTransactionRepository(
+        fStore: FirebaseFirestore
+    ): AllTransactionRepository = AllTransactionRepositoryImp( fStore)
+
+    @Provides
+    @Singleton
+    fun provideAllTransactionUseCase(allTransactionRepository: AllTransactionRepository): AllTransactionUseCase =
+        AllTransactionUseCase(allTransactionRepository)
 
 }

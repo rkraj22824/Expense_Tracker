@@ -73,7 +73,7 @@ fun AddTransactionScreen(
                     },
                     shape = RoundedCornerShape(16.dp))
                 Spacer(modifier = Modifier.height(20.dp))
-                OutlinedTextField(value = state.amount, onValueChange = {
+                OutlinedTextField(value = state.amount.toString(), onValueChange = {
                     viewModel.onEvent(AddTransactionEvents.onAmountChange(it))
                 },label = {
                     Text(text = "Amount")
@@ -106,7 +106,7 @@ fun AddTransactionScreen(
                         if(state.title.isNotEmpty() && state.amount!=null && state.tag.isNotEmpty() && state.note.isNotEmpty()){
                             Toast.makeText(context,"Transaction Added ",Toast.LENGTH_SHORT).show()
                             navController.navigate(Screen.HomeScreen.route)
-                            viewModel.onEvent(AddTransactionEvents.onSaveClick(state.title,state.amount,state.tag,state.note,state.selectedText))
+                            viewModel.onEvent(AddTransactionEvents.onSaveClick(state.title,state.amount.toLong(),state.tag,state.note,state.selectedText))
                         }else{
                             Toast.makeText(context,"Please fill all the fields",Toast.LENGTH_SHORT).show()
                         }
