@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.expense_tracker.presentation.AddTransactionScreen
-import com.example.expense_tracker.presentation.AllTransactions
-//import com.example.expense_tracker.presentation.AllTransactions
-import com.example.expense_tracker.presentation.SignupScreen
+import com.example.expense_tracker.presentation.addTransaction.AddTransactionScreen
+import com.example.expense_tracker.presentation.allTransaction.AllTransactions
+import com.example.expense_tracker.presentation.register.SignupScreen
 import com.example.expense_tracker.presentation.HomeScreen
-import com.example.expense_tracker.presentation.LoginScreen
-import com.example.expense_tracker.presentation.ProfileScreen
+import com.example.expense_tracker.presentation.editTransaction.DetailsTransactionScreen
+import com.example.expense_tracker.presentation.login.LoginScreen
+import com.example.expense_tracker.presentation.profile.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -45,7 +45,10 @@ fun Navigation(
                 AddTransactionScreen(navController)
             }
             composable(Screen.AllTransactionScreen.route){
-                AllTransactions(navController=navController)
+                AllTransactions(navController)
+            }
+            composable(Screen.DetailsTransactionScreen.route){
+                DetailsTransactionScreen()
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.example.expense_tracker.data.repository
 
+
 import com.example.expense_tracker.common.Resource
-import com.example.expense_tracker.domain.model.Transaction
 import com.example.expense_tracker.domain.repository.AddTransactionRepository
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -15,35 +15,31 @@ import javax.inject.Singleton
 class AddTransactionRepositoryImp @Inject constructor(
     private val fAuth: FirebaseAuth,
     private val fStore: FirebaseFirestore
-):AddTransactionRepository {
+) : AddTransactionRepository {
     override suspend fun addTransaction(
+        id: String,
         title: String,
         amount: Long,
         type: String,
         tag: String,
-        note: String
-    ): Flow<Resource<AuthResult>> = flow{
+        note: String,
+        date: String
+    ): Flow<Resource<AuthResult>> = flow {
         try {
             val result = fStore.collection("Transactions").add(
                 hashMapOf(
+                    "id"  to id,
                     "title" to title,
                     "amount" to amount,
                     "tag" to tag,
                     "note" to note,
                     "type" to type,
+                    "date" to date
                 )
             )
-        }catch(e:Exception){
+        } catch (e: Exception) {
 
         }
     }
 
-    override suspend fun getProfile(): Flow<Transaction> = flow{
-        try {
-
-
-        }catch (e:Exception) {
-
-        }
-    }
 }

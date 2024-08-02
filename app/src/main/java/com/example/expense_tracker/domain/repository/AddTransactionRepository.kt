@@ -7,6 +7,5 @@ import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow
 
 interface AddTransactionRepository {
-    suspend fun addTransaction(title: String, amount: Long, type: String, tag: String, note: String):Flow<Resource<AuthResult>>
-    suspend fun getProfile(): Flow<Transaction>
+    suspend fun addTransaction(id:String,title: String, amount: Long, type: String, tag: String, note: String,date:String):Flow<Resource<AuthResult>>
 }

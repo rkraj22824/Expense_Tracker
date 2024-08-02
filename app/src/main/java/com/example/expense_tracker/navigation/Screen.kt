@@ -6,6 +6,7 @@ sealed class Screen(val route: String) {
     object HomeScreen : Screen("home_screen")
     object ProfileScreen:Screen("profile_screen")
     object AddTransactionScreen:Screen("add_transaction_screen")
-    object AllTransactionScreen:Screen("all_transaction_string")
+    object AllTransactionScreen:Screen("all_transaction_screen")
+    object DetailsTransactionScreen:Screen("details_transaction_screen")
 
 }
