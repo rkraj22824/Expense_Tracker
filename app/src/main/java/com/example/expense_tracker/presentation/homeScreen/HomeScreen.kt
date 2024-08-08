@@ -22,16 +22,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Assignment
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.ArrowDownward
 import androidx.compose.material.icons.outlined.ArrowUpward
 import androidx.compose.material3.BottomAppBar
-
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,8 +46,6 @@ import androidx.navigation.NavController
 import com.example.expense_tracker.navigation.Screen
 import com.example.expense_tracker.presentation.allTransaction.TransactionItem
 import com.example.expense_tracker.presentation.allTransaction.AllTransactionViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -73,9 +68,7 @@ fun HomeScreen(
             }
         },
         bottomBar = {
-            BottomAppBar(
-
-            ) {
+            BottomAppBar {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
@@ -111,9 +104,6 @@ fun HomeScreen(
         val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
         val homeScreenState = homeScreenViewModel.homeScreenState.collectAsState().value
 
-        val recentransactionState = homeScreenViewModel.recentTransactionState.collectAsState().value
-
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -121,10 +111,11 @@ fun HomeScreen(
                 .padding(bottom = 60.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             Column(
                 modifier = Modifier.padding(16.dp, 0.dp)
             ) {
+                Spacer(modifier = Modifier.height(40.dp))
                 Card(
                     modifier = Modifier
                         .background(Color(0xFFD16C97)),
@@ -155,8 +146,7 @@ fun HomeScreen(
                                 color = Color.White
 
                             )
-
-                            Spacer(modifier = Modifier.height(24.dp))
+                            Spacer(modifier = Modifier.height(54.dp))
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -226,7 +216,7 @@ fun HomeScreen(
                                 }
                             }
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }
@@ -252,7 +242,6 @@ fun HomeScreen(
                 ) {
                     if (typeState.selectedText == "All") {
                         items(transactionState.allTransaction) { transaction ->
-    //                        recentransactionState.list.takeLast(5).reversed()
                             TransactionItem(transaction = transaction) {
                                 navController.navigate(Screen.DetailsTransactionScreen.sendId(it))
                             }

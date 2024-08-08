@@ -1,6 +1,6 @@
 package com.example.expense_tracker.presentation.detailTransaction
 
-import android.util.Log
+
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.expense_tracker.navigation.Screen
-import com.example.expense_tracker.presentation.allTransaction.AllTransactionEvent
 import com.example.expense_tracker.presentation.allTransaction.AllTransactionViewModel
 
 @Composable
@@ -44,6 +43,9 @@ fun DetailsTransactionScreen(
 ) {
     val viewModel= hiltViewModel<AllTransactionViewModel>()
     val state = viewModel.transactionById.collectAsState().value
+
+    val detailViewModel = hiltViewModel<DeleteTransactionViewModel>()
+    val context = LocalContext.current
     LaunchedEffect(Unit ) {
         viewModel.fetchTransactionById(id)
     }
@@ -78,12 +80,14 @@ fun DetailsTransactionScreen(
                 ){
                     IconButton(
                         onClick = {
+                            detailViewModel.onEvent(DetailsTransactionEvent.onDelete(id))
                             navController.navigate(Screen.AllTransactionScreen.route)
+                            Toast.makeText(context, "Deleted Transaction", Toast.LENGTH_SHORT).show()
                         }
                     ){
                         Icon(
                             imageVector = Icons.Outlined.Delete,
-                            contentDescription = "Expense Icon",
+                            contentDescription = "Delete",
                             tint = Color.Black,
                             modifier = Modifier.size(40.dp),
                         )
@@ -99,7 +103,7 @@ fun DetailsTransactionScreen(
 
                 Text(
                     text = state.title,
-                    modifier = Modifier.width(64.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     color = Color.Black.copy(alpha = 0.7f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -113,7 +117,7 @@ fun DetailsTransactionScreen(
                 )
                 Text(
                     text = state.amount.toString(),
-                    modifier = Modifier.width(64.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     color = Color.Black.copy(alpha = 0.7f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -127,7 +131,7 @@ fun DetailsTransactionScreen(
                 )
                 Text(
                     text = state.type,
-                    modifier = Modifier.width(64.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     color = Color.Black.copy(alpha = 0.7f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -141,9 +145,9 @@ fun DetailsTransactionScreen(
                 )
                 Text(
                     text = state.tag,
-                    modifier = Modifier.width(64.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     color = Color.Black.copy(alpha = 0.7f),
-                    maxLines = 1,
+                    maxLines = 5,
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(modifier = Modifier.height(32.dp))

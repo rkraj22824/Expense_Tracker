@@ -90,11 +90,11 @@ fun AllTransactions(
                 }
             }
         }
-    ) { paddingValues ->
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(it)
                 .background(Color(0xFFFAD9E6)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -177,12 +177,11 @@ fun AllTransactions(
             } else {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
+                        .padding(10.dp)
                 ) {
                     if (typeState.selectedText == "All") {
                         items(transactionState.allTransaction) { transaction ->
                             TransactionItem(transaction = transaction){
-                                Log.d("idcheck", it)
-//                                viewModel.onEvent(AllTransactionEvent.onIdUpdate(it))
                                 navController.navigate(Screen.DetailsTransactionScreen.sendId(it) )
                             }
                         }
@@ -192,8 +191,6 @@ fun AllTransactions(
                         }
                         ) { transaction ->
                             TransactionItem(transaction = transaction){
-                                Log.d("idcheck", it)
-                                //viewModel.onEvent(AllTransactionEvent.onIdUpdate(it))
                                 navController.navigate(Screen.DetailsTransactionScreen.sendId(it))
                             }
                         }

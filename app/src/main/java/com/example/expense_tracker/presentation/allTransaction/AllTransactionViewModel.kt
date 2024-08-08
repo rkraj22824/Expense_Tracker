@@ -64,11 +64,6 @@ class AllTransactionViewModel @Inject constructor(
         }
     }
 
-//    private fun deleteTransactionById(){
-//        viewModelScope.launch {
-//           deleteTransactionUseCase.invoke(id.value)
-//        }
-//    }
 
     fun onEvent(event:AllTransactionEvent) = viewModelScope.launch {
         when (event) {

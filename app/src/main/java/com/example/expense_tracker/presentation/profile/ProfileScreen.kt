@@ -47,9 +47,7 @@ fun ProfileScreen(
 
     Scaffold(
         bottomBar = {
-            BottomAppBar(
-
-            ) {
+            BottomAppBar {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround

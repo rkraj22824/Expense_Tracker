@@ -10,6 +10,6 @@ class DeleteTransactionRepositoryImp @Inject constructor(
     private val fStore:FirebaseFirestore
 ): DeleteTransactionRepository {
     override suspend fun deleteTransaction(id: String) {
-        fStore.document("Transactions").collection(id)
+        fStore.collection("Transactions").document(id).delete()
     }
 }
