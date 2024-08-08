@@ -22,12 +22,10 @@ class AllTransactionRepositoryImp @Inject constructor(
             var id: String
             result.forEach {
                 id = it.id
-
                 transactions.add(TransactionWithId(id, it.toObject(Transaction::class.java)))
             }
             emit(transactions)
         } catch (e: Exception) {
-
             emit(emptyList())
         }
     }

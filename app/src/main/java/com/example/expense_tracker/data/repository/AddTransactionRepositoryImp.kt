@@ -38,7 +38,7 @@ class AddTransactionRepositoryImp @Inject constructor(
                 )
             )
         } catch (e: Exception) {
-
+            emit(Resource.Error(e.message.toString()))
         }
     }
 

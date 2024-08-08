@@ -4,6 +4,7 @@ package com.example.expense_tracker.presentation.addTransaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.expense_tracker.domain.model.Transaction
 import com.example.expense_tracker.domain.usecase.AddTransactionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -2,7 +2,6 @@ package com.example.expense_tracker.domain.repository
 
 
 import com.example.expense_tracker.common.Resource
-import com.example.expense_tracker.domain.model.Transaction
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow
 

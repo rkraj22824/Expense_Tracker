@@ -7,6 +7,9 @@ sealed class Screen(val route: String) {
     object ProfileScreen:Screen("profile_screen")
     object AddTransactionScreen:Screen("add_transaction_screen")
     object AllTransactionScreen:Screen("all_transaction_screen")
-    object DetailsTransactionScreen:Screen("details_transaction_screen")
-
+    object DetailsTransactionScreen:Screen("{id}/details_transaction_screen"){
+        fun sendId(id: String) = "$id/details_transaction_screen"
+    }
 }
+
+

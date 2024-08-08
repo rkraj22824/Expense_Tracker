@@ -1,6 +1,7 @@
 package com.example.expense_tracker.presentation.register
 
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -50,8 +52,7 @@ navController: NavController
     val email = viewModel.registerState.collectAsState().value.email
     val password = viewModel.registerState.collectAsState().value.password
 
-
-    val toastMessage = viewModel.authResult.collectAsState().value
+    val context = LocalContext.current
 
     Surface(
         modifier = Modifier
@@ -164,10 +165,15 @@ navController: NavController
             Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = {
-                    viewModel.onEvent(
-                        RegisterEvents.onRegisterClick(
-                        firstName,lastName,email,password
-                    ))
+                    if(firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
+                        viewModel.onEvent(
+                            RegisterEvents.onRegisterClick(
+                                firstName,lastName,email,password
+                            ))
+                        Toast.makeText(context, "Registered successfully", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show()
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()

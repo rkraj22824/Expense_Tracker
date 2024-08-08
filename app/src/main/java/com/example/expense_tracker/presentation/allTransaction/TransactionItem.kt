@@ -32,8 +32,10 @@ import com.example.expense_tracker.domain.model.TransactionWithId
 @Composable
 fun TransactionItem(
     transaction: TransactionWithId,
+ //   modifier: Modifier = Modifier,
     onClick: (id: String) -> Unit
 ) {
+
 
     Row(
         modifier = Modifier
@@ -41,7 +43,6 @@ fun TransactionItem(
             .clip(RoundedCornerShape(15.dp))
             .clickable(
                 onClick = {
-                    Log.d("rhvv",transaction.id)
                     onClick(transaction.id)
                 }
             )
@@ -73,14 +74,14 @@ fun TransactionItem(
             Column {
                 Text(
                     text = transaction.transaction.title,
-                    color = Color.Black,
+                    color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     modifier = Modifier.width(64.dp),
                     text = transaction.transaction.tag,
-                    color = Color.Black.copy(alpha = 0.7f),
+                    color = Color.White.copy(0.7f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )

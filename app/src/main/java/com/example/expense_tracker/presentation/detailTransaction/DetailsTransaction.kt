@@ -1,6 +1,7 @@
-package com.example.expense_tracker.presentation.editTransaction
+package com.example.expense_tracker.presentation.detailTransaction
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,23 +26,26 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.expense_tracker.presentation.addTransaction.AddTransactionViewModel
+import androidx.navigation.NavController
+import com.example.expense_tracker.navigation.Screen
+import com.example.expense_tracker.presentation.allTransaction.AllTransactionEvent
 import com.example.expense_tracker.presentation.allTransaction.AllTransactionViewModel
 
 @Composable
 fun DetailsTransactionScreen(
-
+    navController: NavController,
+    id: String
 ) {
     val viewModel= hiltViewModel<AllTransactionViewModel>()
     val state = viewModel.transactionById.collectAsState().value
-    val id = viewModel.id.collectAsState().value
     LaunchedEffect(Unit ) {
-        viewModel.fetchTransactionById()
+        viewModel.fetchTransactionById(id)
     }
     Column(
         modifier = Modifier
@@ -73,7 +77,9 @@ fun DetailsTransactionScreen(
                     horizontalArrangement = Arrangement.End
                 ){
                     IconButton(
-                        onClick = {}
+                        onClick = {
+                            navController.navigate(Screen.AllTransactionScreen.route)
+                        }
                     ){
                         Icon(
                             imageVector = Icons.Outlined.Delete,
@@ -147,13 +153,13 @@ fun DetailsTransactionScreen(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
                 )
-                Text(
-                    text = state.dateTime,
-                    modifier = Modifier.width(64.dp),
-                    color = Color.Black.copy(alpha = 0.7f),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+//                Text(
+//                        text = state.dateTime,
+//                modifier = Modifier.width(64.dp),
+//                color = Color.Black.copy(alpha = 0.7f),
+//                maxLines = 1,
+//                overflow = TextOverflow.Ellipsis
+//                )
 
             }
         }

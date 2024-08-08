@@ -6,13 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.expense_tracker.domain.model.AllTransaction
 import com.example.expense_tracker.domain.model.Transaction
 import com.example.expense_tracker.domain.usecase.AllTransactionUseCase
-import com.example.expense_tracker.presentation.addTransaction.AddTransactionState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,19 +34,21 @@ class AllTransactionViewModel @Inject constructor(
     val allTransactionState: StateFlow<AllTransactionState> = _allAllTransactionState
 
 
-    fun fetchTransactionById() =
+
+    fun fetchTransactionById(id : String) =
         viewModelScope.launch {
             _transactions.collect {
                 it.allTransaction.filter { t ->
-                    t.id == _id.value
+                    t.id ==  id
                 }.apply {
-                    if (it.allTransaction.size != 0) {
-                        _transactionById.value = it.allTransaction[0].transaction
+                    if (this.isNotEmpty()){
+                        _transactionById.value = this[0].transaction
                     }
                 }
             }
 
         }
+
 
 
     init {
@@ -65,7 +64,13 @@ class AllTransactionViewModel @Inject constructor(
         }
     }
 
-    fun onEvent(event: AllTransactionEvent) = viewModelScope.launch {
+//    private fun deleteTransactionById(){
+//        viewModelScope.launch {
+//           deleteTransactionUseCase.invoke(id.value)
+//        }
+//    }
+
+    fun onEvent(event:AllTransactionEvent) = viewModelScope.launch {
         when (event) {
             is AllTransactionEvent.onTypeChange -> {
                 _typeSelected.value = typeSelected.value.copy(
@@ -77,12 +82,16 @@ class AllTransactionViewModel @Inject constructor(
                 _allAllTransactionState.value = allTransactionState.value.copy(
                     isExpanded = event.expanded
                 )
-
             }
 
             is AllTransactionEvent.onIdUpdate -> {
                 _id.value = event.id
             }
+
+            is AllTransactionEvent.onDelete -> {
+                _id.value = event.id
+            }
+
         }
     }
 }

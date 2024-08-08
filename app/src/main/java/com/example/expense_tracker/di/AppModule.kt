@@ -3,14 +3,20 @@ package com.example.expense_tracker.di
 import com.example.expense_tracker.data.repository.AddTransactionRepositoryImp
 import com.example.expense_tracker.data.repository.AllTransactionRepositoryImp
 import com.example.expense_tracker.data.repository.AuthRepositoryImp
+//import com.example.expense_tracker.data.repository.DeleteTransactionRepositoryImp
+//import com.example.expense_tracker.data.repository.GetTransactionByIdRepositoryImp
 import com.example.expense_tracker.data.repository.ProfileRepositoryImp
 import com.example.expense_tracker.domain.repository.AddTransactionRepository
 import com.example.expense_tracker.domain.repository.AllTransactionRepository
 import com.example.expense_tracker.domain.repository.AuthRepository
+//import com.example.expense_tracker.domain.repository.DeleteTransactionRepository
+//import com.example.expense_tracker.domain.repository.GetTransactionByIdRepository
 import com.example.expense_tracker.domain.repository.ProfileRepository
 import com.example.expense_tracker.domain.usecase.AddTransactionUseCase
 import com.example.expense_tracker.domain.usecase.AllTransactionUseCase
 import com.example.expense_tracker.domain.usecase.AuthUseCase
+//import com.example.expense_tracker.domain.usecase.DeleteTransactionUseCase
+//import com.example.expense_tracker.domain.usecase.GetTransactionByIdUseCase
 import com.example.expense_tracker.domain.usecase.LoginUseCase
 import com.example.expense_tracker.domain.usecase.RegisterUseCase
 import com.google.firebase.Firebase
@@ -79,5 +85,15 @@ class AppModule {
     @Singleton
     fun provideAllTransactionUseCase(allTransactionRepository: AllTransactionRepository): AllTransactionUseCase =
         AllTransactionUseCase(allTransactionRepository)
+
+//    @Provides
+//    @Singleton
+//    fun provideDeleteTransactionRepository(fStore: FirebaseFirestore): DeleteTransactionRepository
+//    = DeleteTransactionRepositoryImp(fStore)
+//
+//    @Provides
+//    @Singleton
+//    fun provideDeleteTransactionUseCase(deleteTransactionRepository: DeleteTransactionRepository): DeleteTransactionUseCase =
+//        DeleteTransactionUseCase(deleteTransactionRepository)
 
 }

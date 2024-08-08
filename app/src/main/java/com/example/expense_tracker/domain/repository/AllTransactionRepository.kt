@@ -7,5 +7,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface AllTransactionRepository {
     suspend fun getAllTransaction(): Flow<List<TransactionWithId>>
-
 }
