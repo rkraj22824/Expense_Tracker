@@ -36,6 +36,10 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -59,11 +63,11 @@ fun AllTransactions(
     val transactionState = viewModel.transactions.collectAsState().value
     val typeState = viewModel.typeSelected.collectAsState().value
 
+
     Scaffold(
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier
-                    .background(Color(0xFFE4AEC5))
+                containerColor = Color(0xFFE4AEC5)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -75,18 +79,22 @@ fun AllTransactions(
                         modifier = Modifier.clickable {
                             navController.navigate(Screen.HomeScreen.route)
                         },
-                        )
+                        tint = Color.White
+                    )
                     Icon(imageVector = Icons.AutoMirrored.Filled.Assignment,
                         contentDescription = "All transactions",
                         modifier = Modifier.clickable {
                             navController.navigate(Screen.AllTransactionScreen.route)
-                        }
+                        },
+                        tint = Color.White
                     )
                     Icon(imageVector = Icons.Default.AccountCircle,
                         contentDescription = "Profile",
                         modifier = Modifier.clickable {
                             navController.navigate(Screen.ProfileScreen.route)
-                        })
+                        },
+                        tint = Color.White
+                    )
                 }
             }
         }
@@ -98,11 +106,12 @@ fun AllTransactions(
                 .background(Color(0xFFFAD9E6)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = " All Transactions",
+            Text(
+                text = " All Transactions",
                 fontSize = 20.sp,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Bold,
-                modifier=Modifier.padding(20.dp),
+                modifier = Modifier.padding(20.dp),
                 color = Color.Black
             )
             Spacer(modifier = Modifier.height(22.dp))
@@ -116,7 +125,7 @@ fun AllTransactions(
             ) {
 
 
-                val value: Array<String> = arrayOf("All","Expense", "Income")
+                val value: Array<String> = arrayOf("All", "Expense", "Income")
                 val expanded = viewModel.allTransactionState.collectAsState().value.isExpanded
 
 
@@ -128,7 +137,8 @@ fun AllTransactions(
                     ExposedDropdownMenuBox(
                         expanded = expanded,
                         onExpandedChange = {
-                            viewModel.onEvent(AllTransactionEvent.onExpanded(true)
+                            viewModel.onEvent(
+                                AllTransactionEvent.onExpanded(true)
                             )
                         }
                     ) {
@@ -137,7 +147,8 @@ fun AllTransactions(
                             onValueChange = {},
                             readOnly = true,
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                            modifier = Modifier.menuAnchor()
+                            modifier = Modifier
+                                .menuAnchor()
                                 .background(color = Color(0xFFD16C97)),
                         )
 
@@ -176,21 +187,22 @@ fun AllTransactions(
                 Text(text = "No transactions available")
             } else {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
                         .padding(10.dp)
                 ) {
                     if (typeState.selectedText == "All") {
                         items(transactionState.allTransaction) { transaction ->
-                            TransactionItem(transaction = transaction){
-                                navController.navigate(Screen.DetailsTransactionScreen.sendId(it) )
+                            TransactionItem(transaction = transaction) {
+                                navController.navigate(Screen.DetailsTransactionScreen.sendId(it))
                             }
                         }
                     } else {
-                        items(transactionState.allTransaction.filter{
+                        items(transactionState.allTransaction.filter {
                             it.transaction.type == typeState.selectedText
                         }
                         ) { transaction ->
-                            TransactionItem(transaction = transaction){
+                            TransactionItem(transaction = transaction) {
                                 navController.navigate(Screen.DetailsTransactionScreen.sendId(it))
                             }
                         }

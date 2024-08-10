@@ -12,10 +12,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -44,12 +49,19 @@ fun AddTransactionScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFFFAD9E6))
             .padding(35.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.height(32.dp))
 
         Card(
+            colors = CardColors(
+                containerColor = Color(0xFFD16C97),
+                disabledContainerColor = Color.White,
+                contentColor = Color.White,
+                disabledContentColor = Color.White
+            ),
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier.heightIn(550.dp)
         ) {
@@ -66,20 +78,22 @@ fun AddTransactionScreen(
                     fontWeight = FontWeight.Bold,
                 )
                 Spacer(modifier = Modifier.height(36.dp))
-                OutlinedTextField(
+                TextField(
                     value = state.title, onValueChange = {
                     viewModel.onEvent(AddTransactionEvents.onTitleChange(it))
                 },label = {
                         Text(text = "Title")
                     },
-                    shape = RoundedCornerShape(16.dp))
+
+                    colors = TextFieldDefaults.colors()
+                )
                 Spacer(modifier = Modifier.height(20.dp))
-                OutlinedTextField(value = state.amount, onValueChange = {
+                TextField(value = state.amount, onValueChange = {
                     viewModel.onEvent(AddTransactionEvents.onAmountChange(it))
                 },label = {
                     Text(text = "Amount")
                 },
-                    shape = RoundedCornerShape(16.dp),
+
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Decimal
                     )
@@ -90,20 +104,20 @@ fun AddTransactionScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                OutlinedTextField(value = state.tag, onValueChange = {
+                TextField(value = state.tag, onValueChange = {
                     viewModel.onEvent(AddTransactionEvents.onTagChange(it))
                 },label = {
                     Text(text = "Tag")
                 },
-                    shape = RoundedCornerShape(16.dp))
+                    )
                 Spacer(modifier = Modifier.height(20.dp))
-                OutlinedTextField(value = state.note, onValueChange = {
+                TextField(value = state.note, onValueChange = {
                     viewModel.onEvent(AddTransactionEvents.onNoteChange(it))
                 },
                     label = {
                         Text(text = "Note...")
                     },
-                    shape = RoundedCornerShape(16.dp))
+                    )
 
                 Spacer(modifier = Modifier.height(36.dp))
                 Button(

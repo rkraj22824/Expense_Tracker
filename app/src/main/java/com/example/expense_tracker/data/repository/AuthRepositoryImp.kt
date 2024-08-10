@@ -1,5 +1,6 @@
 package com.example.expense_tracker.data.repository
 
+import android.util.Log
 import com.example.expense_tracker.common.Resource
 import com.example.expense_tracker.domain.repository.AuthRepository
 import com.google.firebase.auth.AuthResult

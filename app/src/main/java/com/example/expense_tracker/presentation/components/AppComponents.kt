@@ -15,6 +15,7 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -62,14 +63,14 @@ fun ExposedDropdownMenu(
                 viewModel.onEvent(AddTransactionEvents.onExpanded(true))
             }
         ) {
-            OutlinedTextField(
+            TextField(
                 value = selectedText,
                 onValueChange = {
                 },
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 modifier = Modifier.menuAnchor(),
-                shape = RoundedCornerShape(16.dp)
+//                shape = RoundedCornerShape(16.dp)
             )
 
             ExposedDropdownMenu(

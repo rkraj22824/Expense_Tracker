@@ -1,6 +1,5 @@
 package com.example.expense_tracker.presentation.login
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,6 +21,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.expense_tracker.common.Resource
 import com.example.expense_tracker.navigation.Screen
 
 @Composable
@@ -46,6 +47,11 @@ navController: NavController,
     val context = LocalContext.current
     val email = viewModel.loginState.collectAsState().value.email
     val password = viewModel.loginState.collectAsState().value.password
+    val loginResult = viewModel.loginResult.collectAsState().value
+
+//    LaunchedEffect(Unit) {
+//        viewModel.onLoginCLick()
+//    }
 
     Surface(
         modifier= Modifier
@@ -90,7 +96,7 @@ navController: NavController,
                     .clip(RoundedCornerShape(8.dp)),
                 value = email,
                 onValueChange = {
-                   viewModel.onEvent(LoginEvents.onEmailValueChange(it))
+                   viewModel.onEvent(LoginEvents.onEmailValueChange(it),navController)
                 },
                 label = { Text(text = "Email") },
                 leadingIcon = {
@@ -106,7 +112,7 @@ navController: NavController,
                     .clip(RoundedCornerShape(8.dp)),
                 value = password,
                 onValueChange = {
-                    viewModel.onEvent(LoginEvents.onPasswordValueChange(it))
+                    viewModel.onEvent(LoginEvents.onPasswordValueChange(it),navController)
                 },
                 label = { Text(text = "Password") },
                 leadingIcon = {
@@ -120,12 +126,13 @@ navController: NavController,
 
             Button(
                 onClick = {
-                    if(email.isNotEmpty() && password.isNotEmpty()){
-                        viewModel.onEvent(LoginEvents.onLoginClick(email,password))
-                        navController.navigate(Screen.HomeScreen.route)
-                    }else{
-                        Toast.makeText(context, "Please enter email and password", Toast.LENGTH_SHORT).show()
-                    }
+
+                    viewModel.onEvent(LoginEvents.onLoginClick(email, password),navController)
+//                  if(loginResult.success){
+//                      navController.navigate(Screen.HomeScreen.route)
+//                  }else{
+//                      Toast.makeText(context, loginResult.error, Toast.LENGTH_SHORT).show()
+//                  }
                 },
                 modifier = Modifier
                     .fillMaxWidth()

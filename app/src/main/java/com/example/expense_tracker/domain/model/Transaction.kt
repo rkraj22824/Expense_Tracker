@@ -8,6 +8,6 @@ data class Transaction(
     val tag: String = "",
     val note: String = "",
     val type: String ="",
-    val dateTime: String=""
+    val date: String=""
 
 )

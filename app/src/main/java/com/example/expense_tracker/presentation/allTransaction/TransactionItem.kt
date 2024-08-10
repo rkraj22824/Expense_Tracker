@@ -100,7 +100,7 @@ fun TransactionItem(
                     fontSize = 18.sp,
                 )
                 Text(
-                    text = transaction.transaction.dateTime,
+                    text = transaction.transaction.date,
                     color = Color.White.copy(0.7f),
                 )
             }

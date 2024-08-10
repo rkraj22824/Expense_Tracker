@@ -23,6 +23,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,9 +48,12 @@ fun ProfileScreen(
     val lastName = viewModel.lastName.collectAsState().value
     val email = viewModel.email.collectAsState().value
 
+
     Scaffold(
         bottomBar = {
-            BottomAppBar {
+            BottomAppBar(
+                containerColor = Color(0xFFE4AEC5)
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
@@ -56,19 +62,24 @@ fun ProfileScreen(
                         contentDescription = "Home Screen",
                         modifier = Modifier.clickable {
                             navController.navigate(Screen.HomeScreen.route)
-                        }
+                        },
+                        tint = Color.White
                     )
                     Icon(imageVector = Icons.AutoMirrored.Filled.Assignment,
                         contentDescription = "All transactions",
                         modifier = Modifier.clickable {
                             navController.navigate(Screen.AllTransactionScreen.route)
-                        }
+                        },
+                        tint = Color.White
                     )
-                    Icon(imageVector = Icons.Default.AccountCircle,
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
                         contentDescription = "Profile",
                         modifier = Modifier.clickable {
                             navController.navigate(Screen.ProfileScreen.route)
-                        })
+                        },
+                        tint = Color.White
+                    )
                 }
             }
         }

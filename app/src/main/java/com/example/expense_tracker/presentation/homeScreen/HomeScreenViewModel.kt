@@ -22,8 +22,7 @@ class HomeScreenViewModel @Inject constructor(
     private val _homeScreenState = MutableStateFlow(HomeScreenState())
     val homeScreenState: StateFlow<HomeScreenState> = _homeScreenState.asStateFlow()
 
-    private val _recentTransactionState = MutableStateFlow(RecentTransactionState())
-    val recentTransactionState: StateFlow<RecentTransactionState> = _recentTransactionState
+
 
  init {
      fetchHomeScreenData()
@@ -45,9 +44,6 @@ class HomeScreenViewModel @Inject constructor(
                         it.transaction.type == "Expense"
                     }.sumOf { it.transaction.amount }
                 )
-//                _recentTransactionState.value = recentTransactionState.value.copy(
-//                    list = it.allTransaction.takeLast(4).reversed()
-//                )
 
             }
 
