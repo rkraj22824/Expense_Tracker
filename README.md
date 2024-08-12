@@ -1,4 +1,12 @@
 <img width="208" alt="e1" src="https://github.com/user-attachments/assets/f292a40a-d2ee-4c15-b637-e6c69e055d10">
 <img width="215" alt="e2" src="https://github.com/user-attachments/assets/521b8f43-93a0-43c6-8fe7-25fff6d47656">
 <img width="373" alt="e3" src="https://github.com/user-attachments/assets/689ab201-c901-451d-acc2-ec35fcbb7d06">
-
+<img width="233" alt="notransactions" src="https://github.com/user-attachments/assets/7499051e-f5bb-4568-b5d1-ce42eb3c791a">
+<img width="233" alt="noalltransactions" src="https://github.com/user-attachments/assets/32f6bcbb-cff2-44c1-ade5-d70f48a5a974">
+<img width="230" alt="h1" src="https://github.com/user-attachments/assets/5ca4d82c-a5ad-4d17-8dec-5ec3c9c120a6">
+<img width="246" alt="allTransactions" src="https://github.com/user-attachments/assets/8df0296d-ccf3-4b31-9e05-84046322ea01">
+<img width="234" alt="incomeall" src="https://github.com/user-attachments/assets/3138f5b0-6437-452e-a04a-80180b89dab6">
+<img width="225" alt="expense" src="https://github.com/user-attachments/assets/f568c2e2-c49a-4084-87c5-d61d9a318e56">
+<img width="187" alt="card" src="https://github.com/user-attachments/assets/f201912b-c936-4211-989e-08dc83b46de8">
+<img width="236" alt="deletecard" src="https://github.com/user-attachments/assets/3fba9500-61e1-4e12-9086-c960a4e92496">
+<img width="185" alt="gvg" src="https://github.com/user-attachments/assets/f29f5af1-11ad-4bf6-9a0f-d2212b98f2ee">
