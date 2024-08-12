@@ -85,15 +85,19 @@ fun ProfileScreen(
         }
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .background(Color(0xFFFAD9E6)),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
+
             Icon(
-                painter = painterResource(id = R.drawable.man),
-                contentDescription = "Profile")
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription ="Profile",
+                modifier = Modifier.size(100.dp)
+            )
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = firstName + " " + lastName)
             Spacer(modifier = Modifier.height(16.dp))
