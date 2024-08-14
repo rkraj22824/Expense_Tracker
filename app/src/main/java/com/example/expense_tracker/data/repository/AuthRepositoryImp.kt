@@ -22,7 +22,8 @@ class AuthRepositoryImp @Inject constructor(
     override suspend fun register(
         firstName: String,
         lastName: String,
-        email: String,
+        email: String
+        ,
         password: String
     ): Flow<Resource<AuthResult>> = flow {
         try {
@@ -34,7 +35,7 @@ class AuthRepositoryImp @Inject constructor(
                             "firstName" to firstName,
                             "lastName" to lastName,
                             "email" to email,
-                            "password" to password
+//                            "password" to password
                         )
                         fStore.collection("users").document(fAuth.currentUser!!.uid).set(users)
                     }
