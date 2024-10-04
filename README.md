@@ -3,6 +3,7 @@
 <img width="373" alt="e3" src="https://github.com/user-attachments/assets/689ab201-c901-451d-acc2-ec35fcbb7d06">
 <img width="233" alt="notransactions" src="https://github.com/user-attachments/assets/7499051e-f5bb-4568-b5d1-ce42eb3c791a">
 <img width="233" alt="noalltransactions" src="https://github.com/user-attachments/assets/32f6bcbb-cff2-44c1-ade5-d70f48a5a974">
+<img width="185" alt="incomeAdd" src="https://github.com/user-attachments/assets/03cb6209-8a46-45ad-a361-c2b58010edca">
 <img width="230" alt="h1" src="https://github.com/user-attachments/assets/5ca4d82c-a5ad-4d17-8dec-5ec3c9c120a6">
 <img width="246" alt="allTransactions" src="https://github.com/user-attachments/assets/8df0296d-ccf3-4b31-9e05-84046322ea01">
 <img width="234" alt="incomeall" src="https://github.com/user-attachments/assets/3138f5b0-6437-452e-a04a-80180b89dab6">
