@@ -334,7 +334,7 @@ fun DetailsTransactionScreen(
         if (showDialog) {
             AlertDialog(
                 onDismissRequest = {
-                    showDialog = false // Dismiss the dialog when touched outside
+                    showDialog = false
                 },
                 title = {
                     Text(text = "Delete Transaction")

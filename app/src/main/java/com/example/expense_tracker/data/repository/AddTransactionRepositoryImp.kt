@@ -1,7 +1,9 @@
 package com.example.expense_tracker.data.repository
 
 
+import android.util.Log
 import com.example.expense_tracker.common.Resource
+import com.example.expense_tracker.domain.model.Profile
 import com.example.expense_tracker.domain.repository.AddTransactionRepository
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +28,7 @@ class AddTransactionRepositoryImp @Inject constructor(
         date: String
     ): Flow<Resource<AuthResult>> = flow {
         try {
-            val result = fStore.collection("Transactions").add(
+            val result = fStore.collection("users").document(fAuth.currentUser!!.uid).collection("Transactions").add(
                 hashMapOf(
                     "id"  to id,
                     "title" to title,
@@ -37,6 +39,7 @@ class AddTransactionRepositoryImp @Inject constructor(
                     "date" to date
                 )
             )
+
         } catch (e: Exception) {
             emit(Resource.Error(e.message.toString()))
         }

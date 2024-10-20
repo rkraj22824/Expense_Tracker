@@ -22,13 +22,13 @@ class ProfileRepositoryImp @Inject constructor(
     var email = ""
 
     override suspend fun getProfile(): Flow<Profile> = flow {
+        Log.d("profile", fAuth.currentUser!!.uid)
             val task = fStore.collection("users").document(fAuth.currentUser!!.uid).get()
                 .await()
             firstName = task.get("firstName") as String
             lastName = task.get("lastName") as String
             email = task.get("email") as String
 
-            emit(Profile(firstName, lastName, email))
-
+        emit(Profile(firstName, lastName, email))
     }
 }

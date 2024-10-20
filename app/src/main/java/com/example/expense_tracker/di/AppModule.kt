@@ -81,8 +81,9 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAllTransactionRepository(
-        fStore: FirebaseFirestore
-    ): AllTransactionRepository = AllTransactionRepositoryImp( fStore)
+        fStore: FirebaseFirestore,
+        fAuth: FirebaseAuth
+    ): AllTransactionRepository = AllTransactionRepositoryImp( fStore,fAuth)
 
     @Provides
     @Singleton
@@ -91,8 +92,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideDeleteTransactionRepository(fStore: FirebaseFirestore): DeleteTransactionRepository
-    = DeleteTransactionRepositoryImp(fStore)
+    fun provideDeleteTransactionRepository(fStore: FirebaseFirestore,fAuth: FirebaseAuth): DeleteTransactionRepository
+    = DeleteTransactionRepositoryImp(fStore,fAuth)
 
     @Provides
     @Singleton

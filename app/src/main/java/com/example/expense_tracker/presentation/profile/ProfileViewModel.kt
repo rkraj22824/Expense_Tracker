@@ -1,6 +1,7 @@
 package com.example.expense_tracker.presentation.profile
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.expense_tracker.domain.usecase.ProfileUseCase
@@ -23,11 +24,13 @@ class ProfileViewModel @Inject constructor(
     private val _email = MutableStateFlow("")
     val email = _email.asStateFlow()
 
+
     init {
         getProfile()
     }
 
     private fun getProfile() = viewModelScope.launch {
+
         profileUseCase.getProfile().collect {
             _firstName.value = it.firstName
             _lastName.value = it.lastName

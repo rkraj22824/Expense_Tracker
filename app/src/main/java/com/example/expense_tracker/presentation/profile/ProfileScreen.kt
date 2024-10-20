@@ -1,6 +1,7 @@
 package com.example.expense_tracker.presentation.profile
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -43,7 +44,7 @@ fun ProfileScreen(
     navController: NavController
 ) {
     var currentStatus = FirebaseAuth.getInstance().currentUser
-    val viewModel: ProfileViewModel = hiltViewModel()
+    val viewModel = hiltViewModel<ProfileViewModel>()
     val firstName = viewModel.firstName.collectAsState().value
     val lastName = viewModel.lastName.collectAsState().value
     val email = viewModel.email.collectAsState().value
@@ -91,8 +92,6 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription ="Profile",

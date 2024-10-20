@@ -1,5 +1,6 @@
 package com.example.expense_tracker.presentation.login
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -128,11 +129,7 @@ navController: NavController,
                 onClick = {
 
                     viewModel.onEvent(LoginEvents.onLoginClick(email, password),navController)
-//                  if(loginResult.success){
-//                      navController.navigate(Screen.HomeScreen.route)
-//                  }else{
-//                      Toast.makeText(context, loginResult.error, Toast.LENGTH_SHORT).show()
-//                  }
+//
                 },
                 modifier = Modifier
                     .fillMaxWidth()

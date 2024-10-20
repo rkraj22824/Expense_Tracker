@@ -1,6 +1,7 @@
 package com.example.expense_tracker.presentation.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
@@ -10,7 +11,6 @@ import com.example.expense_tracker.navigation.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,12 +26,7 @@ class LoginViewModel @Inject constructor(
     private val _loginResult = MutableStateFlow(OnClickState())
     val loginResult: StateFlow<OnClickState> = _loginResult
 
-//
-//    fun onLoginCLick(){
-//        viewModelScope.launch {
-//
-//        }
-//    }
+
 
     fun onEvent(event: LoginEvents, navController: NavController) {
         when (event) {
@@ -70,6 +65,7 @@ class LoginViewModel @Inject constructor(
                             }
                             is Resource.Success -> {
                                 navController.navigate(Screen.HomeScreen.route)
+                                Toast.makeText(navController.context, "Login Successful!", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
